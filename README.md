@@ -10,7 +10,7 @@ script which auto manage your work
 $ gem install xcodeproj
 ```
 参考资源路径：
-1,[使用代码为xcode工程添加文件](https://draveness.me/bei-xcodeproj-keng-de-zhe-ji-tian)
-2,[CocoaPods/Xcodeproj](https://github.com/CocoaPods/Xcodeproj)
-3,[CocoaPods/Xcodeproj_API](https://www.rubydoc.info/gems/xcodeproj/Xcodeproj/Project/Object/AbstractBuildPhase#)
+1. [使用代码为xcode工程添加文件](https://draveness.me/bei-xcodeproj-keng-de-zhe-ji-tian)
+2. [CocoaPods/Xcodeproj](https://github.com/CocoaPods/Xcodeproj)
+3. [CocoaPods/Xcodeproj_API](https://www.rubydoc.info/gems/xcodeproj/Xcodeproj/Project/Object/AbstractBuildPhase#)
 
