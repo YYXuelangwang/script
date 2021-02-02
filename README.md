@@ -18,5 +18,7 @@ $ gem install xcodeproj
 
 将android的xml和ios的strings文件整理到一起，成为最终的csv文件，支持逆向解析
 
-
-
+支持功能：
+1. 将英文的ios本地化文件Localizabel.strings和英文的android本地化文件android.xml，解析合并成csv文件；
+2. 更新英文ios本地化文件/英文android本地化文件中，新增/修改的部分到csv文件中；
+3. 从csv文件中解析出来各平台需要的本地化文件（包括：英文，繁体，俄语）
