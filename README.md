@@ -14,3 +14,9 @@ $ gem install xcodeproj
 2. [CocoaPods/Xcodeproj](https://github.com/CocoaPods/Xcodeproj)
 3. [CocoaPods/Xcodeproj_API](https://www.rubydoc.info/gems/xcodeproj/Xcodeproj/Project/Object/AbstractBuildPhase#)
 
+## manager_multi_plat_local_string2
+
+将android的xml和ios的strings文件整理到一起，成为最终的csv文件，支持逆向解析
+
+
+
