@@ -19,6 +19,7 @@ import json
 ANDROID = "android"
 VALUE = "value"
 IOS = "ios"
+ROW_IDX = "row_idx"
 
 def get_lines(filePath):
     f = open(filePath)
@@ -299,14 +300,17 @@ CN_VALUE = "cn_value"
 RU_VALUE = "ru_value"
 def write_to_csv(path, ret_list, first=None):
     f = open(path, 'w')
-    csvWrite = csv.DictWriter(f, [ANDROID_KEY, IOS_KEY, EN_VALUE, CN_VALUE, RU_VALUE])
+    csvWrite = csv.DictWriter(f, [ROW_IDX, ANDROID_KEY, IOS_KEY, EN_VALUE, CN_VALUE, RU_VALUE])
     csvWrite.writeheader()
+    row_index = -1
     for dic in ret_list:
         if first:
+            row_index = row_index + 1
             writeDic = {
                 ANDROID_KEY:dic[ANDROID],
                 IOS_KEY:dic[IOS],
-                EN_VALUE:(dic[VALUE])
+                EN_VALUE:(dic[VALUE]),
+                ROW_IDX:row_index,
             }
             # print writeDic
             csvWrite.writerow(writeDic)
@@ -356,12 +360,14 @@ def update_android_dic(ret_list, android_dic, lang=EN_VALUE):
                 android_key = list(android_dic.keys())[list(android_dic.values()).index(v)]
                 dic[ANDROID_KEY] = android_key
                 android_dic.pop(android_key) 
-
+    row_index = len(ret_list) - 1
     for k, v in android_dic.items():
+        row_index = row_index + 1
         dic = {
             IOS_KEY:"",
             lang:v,
             ANDROID_KEY:k,
+            ROW_IDX:row_index,
         } 
         ret_list.append(dic) 
 
@@ -449,11 +455,14 @@ def update_ios_dic(ret_list, ios_dic, lang=EN_VALUE):
                 dic[IOS_KEY] = ios_key
                 ios_dic.pop(ios_key)
 
+    row_index = len(ret_list) - 1
     for k, v in ios_dic.items():
+        row_index = row_index + 1
         dic = {
             IOS_KEY:k,
             lang:v,
             ANDROID_KEY:"",
+            ROW_IDX:row_index,
         } 
         ret_list.append(dic) 
 
@@ -876,17 +885,15 @@ if __name__ == "__main__":
 
 # /Users/Shared/Jenkins/ClientPublic/pokio_multi_lang
     # 配置你的路径，最好是相对路径，也可以拷贝到当前脚本目录下
-    ios_path = '../client_ios2/Pokio/en.lproj/Localizable.strings'    
     # ios_path = "none"
-    android_path = 'strings_en.xml'
     # android_path = "none"
-    csv_path = 'result.csv'
+    csv_path = '../ios_android_txt.csv'
 
-    # update_type = "ios"
+    ios_path = '../input/localization_ios_en_value.strings'
+    android_path = '../input/android_string_en_value.xml' 
     # ret = mix_ios_android_dic({"a":"abc", "b":"abc", "c":"abc"},{"m":"abc"})
     # read_android_special_localization(android_path)
 
-    # ios_cn_path = '../client_ios2/Pokio/zh-Hant.lproj/Localizable.strings'   
     # check_two_ios_localization_file(ios_path, ios_cn_path, 'new_increase_data.strings')
     # ios_path = 'new_increase_data.strings'
     # read_ios_localization(ios_path)
@@ -903,11 +910,6 @@ if __name__ == "__main__":
         if not os.path.exists(csv_path):
             create_first_csv(csv_path, ios_path, android_path)
         else:
-            # if update_type == "ios":
-            #     android_path = "none"
-            # if update_type == "android":
-            #     ios_path = "none"
-            # update_csv(csv_path, ios_path, android_path) 
             l = [EN_VALUE, CN_VALUE]
             for lang in l:
                 ios_path = '../input/' + 'localization_ios_' + lang + '.strings'
@@ -916,7 +918,6 @@ if __name__ == "__main__":
                     android_path = "none"
                 if update_type == "android":
                     ios_path = "none" 
-                print update_type
                 update_csv_other_lang(csv_path, lang, ios_path, android_path)
 
     elif action_type == 2:
