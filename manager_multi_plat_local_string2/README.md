@@ -56,7 +56,7 @@ RU_VALUE = "ru_value"
 
 后期需要支持新的语言的话，按上面这种方式在对应的位置添加；
 
-![image](https://github.com/YYXuelangwang/script/manager_multi_plat_local_string2/blob/master/convert_localization.png)
+![image](https://github.com/YYXuelangwang/script/blob/master/manager_multi_plat_local_string2/convert_localization.png)
 
 ### 工具阅读/思路
 
